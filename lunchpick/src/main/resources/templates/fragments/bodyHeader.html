@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+#right {
+  text-align: right;
+}
+</style>
+<div class="header" th:fragment="bodyHeader">
+    <a href="/"><h3 class="text-muted">LUNCH PICK</h3></a>
+
+    <div id = "right">
+        <p>
+            <a href="/users/login">로그인</a>
+            <a href="/users/new">회원가입</a>
+        </p>
+    </div>
+</div>
