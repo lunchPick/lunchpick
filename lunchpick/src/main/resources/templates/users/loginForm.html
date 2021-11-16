@@ -10,8 +10,9 @@
  }
 </style>
 <body>
-<div class="container">
 <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<div class="container">
+
 
   <form role="form" action="/users/login" th:object="${loginForm}" method="post">
     <div class="form-group">
@@ -32,7 +33,6 @@
       <a class="" href="/users/new">회원가입</a>
     </p>
   </div>
-  <div th:replace="fragments/footer :: footer" />
 </div>
 </body>
 </html>

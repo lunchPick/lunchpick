@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 
-<div class="header" th:fragment="bodyHeader">
-  <style>
-
-@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR|ZCOOL+QingKe+HuangYou');
-
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 @charset "utf-8";
 
 * {
@@ -38,9 +32,8 @@ header {
 	justify-content: space-between;
 }
 
-.container1 {
+.container {
 	width:1440px;
-	height:100px;
 	margin:0 auto;
 }
 
@@ -58,6 +51,7 @@ header ul {
 	height: 100%;
 	display: flex;
 	justify-content: space-between;
+
 }
 
 header ul > li {
@@ -65,24 +59,5 @@ header ul > li {
 	height: 100%;
 	display: flex;
 	align-items: center;
+	font-family: 'NanumSquare', sans-serif;
 }
-
-  </style>
-  <body>
-
-  <div class="container1">
-    <header>
-      <h2><a href="/">lunchPick</a></h2>
-      <nav>
-        <ul>
-          <li><a href="/ranLunchPick">랜덤 런치픽</a></li>
-          <li><a href="/myLunchPick">나의 런치픽</a></li>
-          <li><a href="/locLunchPick">주위 런치픽</a></li>
-          <li><a href="/users/login">Login</a></li>
-        </ul>
-      </nav>
-    </header>
-  </div>
-  </body>
-</div>
-</html>
