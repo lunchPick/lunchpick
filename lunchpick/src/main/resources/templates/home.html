@@ -18,17 +18,21 @@
 }
 </style>
 <body>
-<div class="flex-container">
-    <div th:replace="fragments/bodyHeader :: bodyHeader" />
-
+<div th:replace="fragments/bodyHeader :: bodyHeader" />
+<div class="container">
     <div class="jumbotron">
         <div class="btn-group">
-            <button class = "btn btn-lg btn-secondary" type="button" onclick="/" style="width: 300pt; height: 300pt">랜덤 런치픽</button>
-            <button class = "btn btn-lg btn-dark" type="button" onclick="/" style="width: 300pt; height: 300pt">나의 런치픽</button>
-            <button class = "btn btn-lg btn-info" type="button" onclick="/" style="width: 300pt; height: 300pt">주위 런치픽</button>
+            <a href="/ranLunchPick">
+                <button class = "btn btn-lg btn-secondary" type="button" onclick="/ranLunchPick" style="width: 300pt; height: 300pt">랜덤 런치픽</button>
+            </a>
+            <a href="/myLunchPick">
+                <button class = "btn btn-lg btn-dark" type="button" onclick="/myLunchPick" style="width: 300pt; height: 300pt">나의 런치픽</button>
+            </a>
+            <a href="/locLunchPick">
+                <button class = "btn btn-lg btn-info" type="button" onclick="/locLunchPick" style="width: 300pt; height: 300pt">주위 런치픽</button>
+            </a>
         </div>
     </div>
-    <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
 </body>
 </html>
