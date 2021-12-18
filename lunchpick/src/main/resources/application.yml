@@ -2,11 +2,14 @@ server:
   port: 8088
 
 spring:
+  profiles:
+    include: API-KEY
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/lunchpick?characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul
     username: root
     password: manager
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
