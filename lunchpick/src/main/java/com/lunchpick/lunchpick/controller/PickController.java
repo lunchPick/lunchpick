@@ -12,7 +12,7 @@ public class PickController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody
-    public String getRest(){
+    public KaKaoResponseDTO getRest() {
         return locationService.getRestaurant();
     }
 }
