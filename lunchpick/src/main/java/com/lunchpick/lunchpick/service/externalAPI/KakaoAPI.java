@@ -1,6 +1,7 @@
 package com.lunchpick.lunchpick.service.externalAPI;
 
 import com.lunchpick.lunchpick.controller.KaKaoResponseDTO;
+import com.lunchpick.lunchpick.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -22,7 +23,9 @@ public class KakaoAPI {
     @Value("${kakao_apikey}")
     private String kakao_apikey;
 
-    public KaKaoResponseDTO getRestaurant() {
+    public KaKaoResponseDTO getRestaurant(User user) {
+
+        LocationResponseDTO coordinate = getCoordinate(user);
 
         final HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "KakaoAK " + kakao_apikey);
@@ -32,8 +35,8 @@ public class KakaoAPI {
         String apiURL = "https://dapi.kakao.com/v2/local/search/keyword.JSON?" +
                 "query=" + "맛집"//query
                 + "&category_group_code=" + "FD6"
-                + "&x=" + "37.5606326"
-                + "&y=" + "126.9433486"
+                + "&x=" + coordinate.documents[0].x
+                + "&y=" + coordinate.documents[0].y
                 + "&radius=" + "100";
         final HttpEntity<String> entity = new HttpEntity<>(headers);
 
@@ -41,6 +44,21 @@ public class KakaoAPI {
 
         return restTemplate.exchange(apiURL, HttpMethod.GET, entity,KaKaoResponseDTO.class).getBody();
 
+    }
+
+    public LocationResponseDTO getCoordinate(User user) {
+        String address = user.getAddressHome();
+
+        final HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "KakaoAK " + kakao_apikey);
+
+        RestTemplate restTemplate = new RestTemplate();
+        String apiURL = "https://dapi.kakao.com/v2/local/search/address.JSON?" +
+                "query=" + address;
+
+        final HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        return restTemplate.exchange(apiURL, HttpMethod.GET, entity,LocationResponseDTO.class).getBody();
     }
 
 

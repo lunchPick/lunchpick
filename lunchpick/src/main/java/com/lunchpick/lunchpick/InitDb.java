@@ -30,7 +30,7 @@ public class InitDb {
             User user = new User();
             user.setAge(30);
             user.setAddressCompany("서울 여의도구");
-            user.setAddressHome("서울 서대문구");
+            user.setAddressHome("서울 서대문구 이화여대1안길");
             em.persist(user);
         }
     }
