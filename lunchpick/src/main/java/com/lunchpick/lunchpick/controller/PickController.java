@@ -19,7 +19,7 @@ public class PickController {
     @ResponseBody
     public String getRest() {
 
-        // 로그인한 회원이 첫 번째임을 가정
+        // 로그인한 회원이 첫 번째임을 가정함
        User user = userService.findOne(1L);
         KaKaoResponseDTO list = locationService.getRestaurant(user);
 
