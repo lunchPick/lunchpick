@@ -1,7 +1,14 @@
 package com.lunchpick.lunchpick.service.externalAPI;
 
+import com.lunchpick.lunchpick.controller.KaKaoResponseDTO;
+import com.lunchpick.lunchpick.domain.model.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,12 +17,54 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 @Service
+@RequiredArgsConstructor
 public class KakaoAPI {
 
     @Value("${kakao_apikey}")
     private String kakao_apikey;
 
-    public String getRestaurant() {
+    public KaKaoResponseDTO getRestaurant(User user) {
+
+        LocationResponseDTO coordinate = getCoordinate(user);
+
+        final HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "KakaoAK " + kakao_apikey);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        String apiURL = "https://dapi.kakao.com/v2/local/search/keyword.JSON?" +
+                "query=" + "맛집"//query
+                + "&category_group_code=" + "FD6"
+                + "&x=" + coordinate.documents[0].x
+                + "&y=" + coordinate.documents[0].y
+                + "&radius=" + "100";
+        final HttpEntity<String> entity = new HttpEntity<>(headers);
+
+//        System.out.println(restTemplate.exchange(apiURL, HttpMethod.GET, entity,String.class).toString());
+
+        return restTemplate.exchange(apiURL, HttpMethod.GET, entity,KaKaoResponseDTO.class).getBody();
+
+    }
+
+    public LocationResponseDTO getCoordinate(User user) {
+        String address = user.getAddressHome();
+
+        final HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "KakaoAK " + kakao_apikey);
+
+        RestTemplate restTemplate = new RestTemplate();
+        String apiURL = "https://dapi.kakao.com/v2/local/search/address.JSON?" +
+                "query=" + address;
+
+        final HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        return restTemplate.exchange(apiURL, HttpMethod.GET, entity,LocationResponseDTO.class).getBody();
+    }
+
+
+//    **********  폐기 예정 코드들  **********
+
+    public String getRestaurant_del() {
         try {
             // 맛집 단어 UTF-8로 인코딩
             String query = URLEncoder.encode("맛집", "UTF-8");

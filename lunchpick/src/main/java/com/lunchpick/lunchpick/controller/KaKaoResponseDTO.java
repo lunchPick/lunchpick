@@ -21,5 +21,5 @@ public class KaKaoResponseDTO {
         public String x;
         public String y;
     }
-
 }
+
