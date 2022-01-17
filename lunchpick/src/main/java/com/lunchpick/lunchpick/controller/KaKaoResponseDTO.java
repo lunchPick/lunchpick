@@ -7,7 +7,7 @@ public class KaKaoResponseDTO {
     public Document[] documents;
 
     @Data
-    static class Document {
+    public static class Document {
         public String address_name;
         public String category_group_code;
         public String category_group_name;
