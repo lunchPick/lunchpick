@@ -22,12 +22,12 @@ public class UserController {
         return "users/loginForm";
     }
 
-    @GetMapping("/login")
-    public String getLoginPage(Model model,
-                               @RequestParam(value = "error", required = false) String error,
-                               @RequestParam(value = "exception", required = false) String exception) {
-        model.addAttribute("error", error);
-        model.addAttribute("exception", exception);
-        return "/member/login";
-    }
+//    @GetMapping("/login")
+//    public String getLoginPage(Model model,
+//                               @RequestParam(value = "error", required = false) String error,
+//                               @RequestParam(value = "exception", required = false) String exception) {
+//        model.addAttribute("error", error);
+//        model.addAttribute("exception", exception);
+//        return "/member/login";
+//    }
 }

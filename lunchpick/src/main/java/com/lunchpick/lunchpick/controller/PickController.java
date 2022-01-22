@@ -4,6 +4,7 @@ import com.lunchpick.lunchpick.domain.model.User;
 import com.lunchpick.lunchpick.service.LocationService;
 import com.lunchpick.lunchpick.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Random;
@@ -17,9 +18,9 @@ public class PickController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody
-    public String getRest() {
+    public String getRest(Model model) {
 
-        // 로그인한 회원이 첫 번째임을 가정함
+        // 로그인한 회원이 첫 번째임을 가정함(나중에 스프링 시큐리티 적용)
         User user = userService.findOne(1L);
 
         KaKaoResponseDTO list = locationService.getRestaurant(user);
@@ -33,4 +34,7 @@ public class PickController {
         // 이 부분 넘기는 작업해야 함.
         return list.documents[idx].place_name;
     }
+
+
+
 }
